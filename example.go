@@ -17,6 +17,9 @@ type Example struct {
 
 // ServeDNS implements the middleware.Handler interface.
 func (e Example) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg) (int, error) {
+	// Somewhat convoluted, as we could have printed "example" here and just call
+	// the next middleware - but as an example, show how to wrap a ResponseWriter might be
+	// educational.
 	pw := NewResponsePrinter(w)
 	return middleware.NextOrFailure(e.Name(), e.Next, ctx, pw, r)
 }
