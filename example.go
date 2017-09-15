@@ -4,15 +4,14 @@ package example
 import (
 	"fmt"
 
-	"github.com/coredns/coredns/middleware"
-
+	"github.com/coredns/coredns/plugin"
 	"github.com/miekg/dns"
 	"golang.org/x/net/context"
 )
 
 // Example is an example middleware to ...
 type Example struct {
-	Next middleware.Handler
+	Next plugin.Handler
 }
 
 // ServeDNS implements the middleware.Handler interface.
@@ -21,7 +20,7 @@ func (e Example) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg)
 	// the next middleware - but as an example, show how to wrap a ResponseWriter might be
 	// educational.
 	pw := NewResponsePrinter(w)
-	return middleware.NextOrFailure(e.Name(), e.Next, ctx, pw, r)
+	return plugin.NextOrFailure(e.Name(), e.Next, ctx, pw, r)
 }
 
 // Name implements the Handler interface.
