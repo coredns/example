@@ -22,5 +22,5 @@ example.com {
 
 ## How to Enable
 
-Follow [these](/2017/07/25/compile-time-enabling-or-disabling-middleware/) steps,
+Follow [these](https://coredns.io/2017/07/25/compile-time-enabling-or-disabling-plugins/) steps,
 *example* should be put relatively early in the middleware chain.
