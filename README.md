@@ -1,7 +1,7 @@
 # example
 
 The example middleware prints "example" on every query received. It can be used as documentation for
-writing external middleware and to test if external middleware compiles with CoreDNS.
+writing external plugins and to test if external plugins compile with CoreDNS.
 
 ## Syntax
 
@@ -11,7 +11,7 @@ example
 
 ## Examples
 
-```
+``` corefile
 example.com {
   file example.com.db {
     upstream 8.8.8.8

@@ -1,23 +1,25 @@
-// The example middleware prints example to stdout on every packet received.
+// The example plugin prints example to stdout on every packet received.
 package example
 
 import (
 	"fmt"
+	"io"
+	"os"
 
 	"github.com/coredns/coredns/plugin"
 	"github.com/miekg/dns"
 	"golang.org/x/net/context"
 )
 
-// Example is an example middleware to ...
+// Example is an example plugin to show how to write a plugin.
 type Example struct {
 	Next plugin.Handler
 }
 
-// ServeDNS implements the middleware.Handler interface.
+// ServeDNS implements the plugin.Handler interface.
 func (e Example) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg) (int, error) {
 	// Somewhat convoluted, as we could have printed "example" here and just call
-	// the next middleware - but as an example, show how to wrap a ResponseWriter might be
+	// the next plugin - but as an example, show how to wrap a ResponseWriter might be
 	// educational.
 	pw := NewResponsePrinter(w)
 	return plugin.NextOrFailure(e.Name(), e.Next, ctx, pw, r)
@@ -37,6 +39,8 @@ func NewResponsePrinter(w dns.ResponseWriter) *ResponsePrinter {
 
 // WriteMsg records the status code and calls the underlying ResponseWriter's WriteMsg method.
 func (r *ResponsePrinter) WriteMsg(res *dns.Msg) error {
-	fmt.Println("example")
+	fmt.Fprintf(out, "example")
 	return r.ResponseWriter.WriteMsg(res)
 }
+
+var out io.Writer = os.Stdout
