@@ -1,6 +1,6 @@
 # example
 
-The example middleware prints "example" on every query received. It can be used as documentation for
+The example plugin prints "example" on every query received. It can be used as documentation for
 writing external plugins and to test if external plugins compile with CoreDNS.
 
 ## Syntax
