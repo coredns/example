@@ -1,6 +1,6 @@
 # example
 
-## Namme
+## Name
 
 *example* - prints "example" on every query received.
 
