@@ -1,7 +1,13 @@
 # example
 
-The example middleware prints "example" on every query received. It can be used as documentation for
-writing external plugins and to test if external plugins compile with CoreDNS.
+## Name
+
+*example* - prints "example" on every query received.
+
+## Description
+
+The example plugin prints "example" on every query received. It servesused as documentation for
+writing CoreDNS plugins.
 
 ## Syntax
 
@@ -11,16 +17,12 @@ example
 
 ## Examples
 
+In this configuration, we forward all queries to 9.9.9.9 and print "example" whenever we recieve
+a query.
+
 ``` corefile
-example.com {
-  file example.com.db {
-    upstream 8.8.8.8
-  }
+. {
+  forward . 9.9.9.9
   example
 }
 ```
-
-## How to Enable
-
-Follow [these](https://coredns.io/2017/07/25/compile-time-enabling-or-disabling-plugins/) steps,
-*example* should be put relatively early in the plugin chain.
