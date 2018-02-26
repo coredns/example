@@ -6,7 +6,7 @@
 
 ## Description
 
-The example plugin prints "example" on every query received. It servesused as documentation for
+The example plugin prints "example" on every query received. It serves as documentation for
 writing CoreDNS plugins.
 
 ## Syntax
