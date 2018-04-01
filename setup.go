@@ -3,6 +3,7 @@ package example
 import (
 	"github.com/coredns/coredns/core/dnsserver"
 	"github.com/coredns/coredns/plugin"
+	"github.com/coredns/coredns/plugin/metrics"
 
 	"github.com/mholt/caddy"
 )
@@ -26,6 +27,22 @@ func setup(c *caddy.Controller) error {
 		// can present a slightly nicer error message to the user.
 		return plugin.Error("example", c.ArgErr())
 	}
+
+	// Add a startup function that will -- after all plugins have been loaded -- check if the
+	// prometheus plugin has been used - if so we will export metrics. We can only register
+	// this metric once, hence the "once.Do".
+	c.OnStartup(func() error {
+		once.Do(func() {
+			m := dnsserver.GetConfig(c).Handler("prometheus")
+			if m == nil {
+				return
+			}
+			if x, ok := m.(*metrics.Metrics); ok {
+				x.MustRegister(requestCount)
+			}
+		})
+		return nil
+	})
 
 	// Add the Plugin to CoreDNS, so Servers can use it in their plugin chain.
 	dnsserver.GetConfig(c).AddPlugin(func(next plugin.Handler) plugin.Handler {
