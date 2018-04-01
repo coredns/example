@@ -1,4 +1,6 @@
-// The example plugin prints example to stdout on every packet received.
+// Package example is a CoreDNS plugin that prints "example" to stdout on every packet received.
+//
+// It serves as an example CoreDNS plugin with numerous code comments.
 package example
 
 import (
@@ -7,6 +9,7 @@ import (
 	"os"
 
 	"github.com/coredns/coredns/plugin"
+	"github.com/coredns/coredns/plugin/metrics"
 
 	"github.com/miekg/dns"
 	"golang.org/x/net/context"
@@ -27,6 +30,9 @@ func (e Example) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg)
 
 	// Wrap.
 	pw := NewResponsePrinter(w)
+
+	// Export metric with the server label set to the current server handling the request.
+	requestCount.WithLabelValues(metrics.WithServer(ctx)).Add(1)
 
 	// Call next plugin (if any).
 	return plugin.NextOrFailure(e.Name(), e.Next, ctx, pw, r)
