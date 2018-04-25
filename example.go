@@ -10,11 +10,13 @@ import (
 
 	"github.com/coredns/coredns/plugin"
 	"github.com/coredns/coredns/plugin/metrics"
-	"github.com/coredns/coredns/plugin/pkg/log"
+	clog "github.com/coredns/coredns/plugin/pkg/log"
 
 	"github.com/miekg/dns"
 	"golang.org/x/net/context"
 )
+
+var log = clog.NewWithPlugin("example")
 
 // Example is an example plugin to show how to write a plugin.
 type Example struct {
