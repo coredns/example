@@ -8,8 +8,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-// requestCount exports a prometheus metric that is incremented every time
-// a query is seen by the example plugin.
+// requestCount exports a prometheus metric that is incremented every time a query is seen by the example plugin.
 var requestCount = prometheus.NewCounterVec(prometheus.CounterOpts{
 	Namespace: plugin.Namespace,
 	Subsystem: "example",

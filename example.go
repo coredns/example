@@ -16,6 +16,8 @@ import (
 	"golang.org/x/net/context"
 )
 
+// Define log to be a logger with the plugin name in it. This way we can just use log.Info and
+// friends to log.
 var log = clog.NewWithPlugin("example")
 
 // Example is an example plugin to show how to write a plugin.
@@ -38,7 +40,7 @@ func (e Example) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg)
 	pw := NewResponsePrinter(w)
 
 	// Export metric with the server label set to the current server handling the request.
-	requestCount.WithLabelValues(metrics.WithServer(ctx)).Add(1)
+	requestCount.WithLabelValues(metrics.WithServer(ctx)).Inc()
 
 	// Call next plugin (if any).
 	return plugin.NextOrFailure(e.Name(), e.Next, ctx, pw, r)
@@ -47,8 +49,7 @@ func (e Example) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg)
 // Name implements the Handler interface.
 func (e Example) Name() string { return "example" }
 
-// ResponsePrinter wrap a dns.ResponseWriter and will write example to standard output when
-// WriteMsg is called.
+// ResponsePrinter wrap a dns.ResponseWriter and will write example to standard output when WriteMsg is called.
 type ResponsePrinter struct {
 	dns.ResponseWriter
 }
@@ -58,8 +59,7 @@ func NewResponsePrinter(w dns.ResponseWriter) *ResponsePrinter {
 	return &ResponsePrinter{ResponseWriter: w}
 }
 
-// WriteMsg calls the underlying ResponseWriter's WriteMsg method and prints "example" to standard
-// output.
+// WriteMsg calls the underlying ResponseWriter's WriteMsg method and prints "example" to standard output.
 func (r *ResponsePrinter) WriteMsg(res *dns.Msg) error {
 	fmt.Fprintln(out, ex)
 	return r.ResponseWriter.WriteMsg(res)
