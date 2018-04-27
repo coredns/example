@@ -21,9 +21,11 @@ If monitoring is enabled (via the *prometheus* directive) the following metric i
 
 * `coredns_example_request_count_total{server}` - query count to the *example* plugin.
 
+The `server` label indicated which server handled the request, see the *metrics* plugin for details.
+
 ## Examples
 
-In this configuration, we forward all queries to 9.9.9.9 and print "example" whenever we recieve
+In this configuration, we forward all queries to 9.9.9.9 and print "example" whenever we receive
 a query.
 
 ``` corefile
