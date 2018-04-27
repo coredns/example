@@ -23,6 +23,10 @@ If monitoring is enabled (via the *prometheus* directive) the following metric i
 
 The `server` label indicated which server handled the request, see the *metrics* plugin for details.
 
+## Health
+
+This plugin implements dynamic health checking. It will also return healthy though.
+
 ## Examples
 
 In this configuration, we forward all queries to 9.9.9.9 and print "example" whenever we receive
