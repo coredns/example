@@ -25,7 +25,7 @@ The `server` label indicated which server handled the request, see the *metrics*
 
 ## Health
 
-This plugin implements dynamic health checking. It will also return healthy though.
+This plugin implements dynamic health checking. It will always return healthy though.
 
 ## Examples
 
