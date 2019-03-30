@@ -32,12 +32,12 @@ This plugin implements dynamic health checking. It will always return healthy th
 In this configuration, we forward all queries to 9.9.9.9 and print "example" whenever we receive
 a query.
 
-``` corefile
+~~~ corefile
 . {
   forward . 9.9.9.9
   example
 }
-```
+~~~
 
 ## Also See
 
