@@ -3,7 +3,7 @@ package example
 import (
 	"testing"
 
-	"github.com/mholt/caddy"
+	"github.com/caddyserver/caddy"
 )
 
 // TestSetup tests the various things that should be parsed by setup.
