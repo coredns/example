@@ -61,12 +61,9 @@ func NewResponsePrinter(w dns.ResponseWriter) *ResponsePrinter {
 
 // WriteMsg calls the underlying ResponseWriter's WriteMsg method and prints "example" to standard output.
 func (r *ResponsePrinter) WriteMsg(res *dns.Msg) error {
-	fmt.Fprintln(out, ex)
+	fmt.Fprintln(out, "example")
 	return r.ResponseWriter.WriteMsg(res)
 }
 
 // Make out a reference to os.Stdout so we can easily overwrite it for testing.
 var out io.Writer = os.Stdout
-
-// What we will print.
-const ex = "example"

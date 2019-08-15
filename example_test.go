@@ -29,7 +29,7 @@ func TestExample(t *testing.T) {
 
 	// Call our plugin directly, and check the result.
 	x.ServeDNS(ctx, rec, r)
-	if a := b.String(); a != ex+"\n" {
-		t.Errorf("Failed to print '%s', got %s", ex, a)
+	if a := b.String(); a != "example\n" {
+		t.Errorf("Failed to print '%s', got %s", example, a)
 	}
 }

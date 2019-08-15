@@ -2,12 +2,12 @@
 
 ## Name
 
-*example* - prints "example" on every query received.
+*example* - prints "example" on every query handled.
 
 ## Description
 
-The example plugin prints "example" on every query received. It serves as documentation for
-writing CoreDNS plugins.
+The example plugin prints "example" on every query that go handled by the server. It serves as
+documentation for writing CoreDNS plugins.
 
 ## Syntax
 
