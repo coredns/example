@@ -23,9 +23,9 @@ If monitoring is enabled (via the *prometheus* directive) the following metric i
 
 The `server` label indicated which server handled the request, see the *metrics* plugin for details.
 
-## Health
+## Ready
 
-This plugin implements dynamic health checking. It will always return healthy though.
+This plugin reports readiness to the ready plugin. It will be immediately ready.
 
 ## Examples
 

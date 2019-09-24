@@ -4,6 +4,7 @@
 package example
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"os"
@@ -13,7 +14,6 @@ import (
 	clog "github.com/coredns/coredns/plugin/pkg/log"
 
 	"github.com/miekg/dns"
-	"golang.org/x/net/context"
 )
 
 // Define log to be a logger with the plugin name in it. This way we can just use log.Info and
