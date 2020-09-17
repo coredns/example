@@ -2,11 +2,11 @@
 
 ## Name
 
-*example* - prints "example" on every query handled.
+*example* - prints "example" after a query is handled.
 
 ## Description
 
-The example plugin prints "example" on every query that go handled by the server. It serves as
+The example plugin prints "example" on every query that got handled by the server. It serves as
 documentation for writing CoreDNS plugins.
 
 ## Compilation
@@ -21,16 +21,18 @@ A simple way to consume this plugin, is by adding the following on [plugin.cfg](
 example:github.com/coredns/example
 ~~~
 
+Put this early in the plugin list, so that *example* is executed before any of the other plugins.
+
 After this you can compile coredns by:
 
-```shell script
+``` sh
 go generate
 go build
 ```
 
 Or you can instead use make:
 
-```shell script
+``` sh
 make
 ```
 
@@ -60,6 +62,15 @@ a query.
 ~~~ corefile
 . {
   forward . 9.9.9.9
+  example
+}
+~~~
+
+Or without any external connectivity:
+
+~~~ corefile
+. {
+  whoami
   example
 }
 ~~~
