@@ -3,6 +3,8 @@ package example
 import (
 	"bytes"
 	"context"
+	golog "log"
+	"strings"
 	"testing"
 
 	"github.com/coredns/coredns/plugin/pkg/dnstest"
@@ -18,7 +20,7 @@ func TestExample(t *testing.T) {
 	// Setup a new output buffer that is *not* standard output, so we can check if
 	// example is really being printed.
 	b := &bytes.Buffer{}
-	out = b
+	golog.SetOutput(b)
 
 	ctx := context.TODO()
 	r := new(dns.Msg)
@@ -29,7 +31,7 @@ func TestExample(t *testing.T) {
 
 	// Call our plugin directly, and check the result.
 	x.ServeDNS(ctx, rec, r)
-	if a := b.String(); a != "example\n" {
-		t.Errorf("Failed to print '%s', got %s", example, a)
+	if a := b.String(); !strings.Contains(a, "[INFO] plugin/example: example") {
+		t.Errorf("Failed to print '%s', got %s", "[INFO] plugin/example: example", a)
 	}
 }

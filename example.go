@@ -5,9 +5,6 @@ package example
 
 import (
 	"context"
-	"fmt"
-	"io"
-	"os"
 
 	"github.com/coredns/coredns/plugin"
 	"github.com/coredns/coredns/plugin/metrics"
@@ -61,9 +58,6 @@ func NewResponsePrinter(w dns.ResponseWriter) *ResponsePrinter {
 
 // WriteMsg calls the underlying ResponseWriter's WriteMsg method and prints "example" to standard output.
 func (r *ResponsePrinter) WriteMsg(res *dns.Msg) error {
-	fmt.Fprintln(out, "example")
+	log.Info("example")
 	return r.ResponseWriter.WriteMsg(res)
 }
-
-// Make out a reference to os.Stdout so we can easily overwrite it for testing.
-var out io.Writer = os.Stdout
