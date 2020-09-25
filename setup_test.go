@@ -3,7 +3,7 @@ package example
 import (
 	"testing"
 
-	"github.com/caddyserver/caddy"
+	"github.com/coredns/caddy"
 )
 
 // TestSetup tests the various things that should be parsed by setup.
